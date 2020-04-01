@@ -1,3 +1,4 @@
+/*
 class Hello {
     public static void main(String[] args) {
         System.out.println("Hello világ!");
@@ -10,3 +11,4 @@ class Hello {
         System.out.println(x*y);
     }
 }
+*/
