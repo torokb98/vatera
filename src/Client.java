@@ -1,6 +1,13 @@
 // A Java program for a Client
-import java.net.*;
-import java.io.*;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class Client
 {
@@ -32,6 +39,40 @@ public class Client
         {
             System.out.println(i);
         }
+
+
+        JFrame frame = new JFrame("Vatera");
+        frame.setBounds(200, 200, 450, 500);
+
+        JLabel label1 = new JLabel("Bejelentkezés");
+        label1.setBounds(10, 5, 100, 25);
+
+        JTextField tField1 = new JTextField("Felhasználónév");
+        tField1.setBounds(90, 350, 230, 25);
+
+        JButton button3 = new JButton("Bejelentkezés");
+        button3.setBounds(340, 350, 80, 25);
+
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String field;
+                field = tField1.getText();
+                try {
+                    out.writeUTF(field);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        frame.setLayout(null);
+        frame.add(label1);
+        frame.add(tField1);
+        frame.add(button3);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
 
         // string to read message from input
         String line = "";
