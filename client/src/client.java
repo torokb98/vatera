@@ -1,4 +1,3 @@
-/*
 // A Java program for a Client
 
 import javax.swing.*;
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client
+public class client
 {
     // initialize socket and input output streams
     private Socket socket		 = null;
@@ -18,7 +17,7 @@ public class Client
     private DataOutputStream out	 = null;
 
     // constructor to put ip address and port
-    public Client(String address, int port)
+    public client(String address, int port)
     {
         // establish a connection
         try
@@ -107,7 +106,6 @@ public class Client
 
     public static void main(String args[])
     {
-        Client client = new Client("127.0.0.1", 5000);
+        client client = new client("127.0.0.1", 5000);
     }
 }
-*/
