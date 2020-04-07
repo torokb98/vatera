@@ -104,8 +104,10 @@ public class client
         }
     }
 
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         client client = new client("127.0.0.1", 5000);
+        gui gui = new gui();
+        gui.$$$getRootComponent$$$().setVisible(true);
     }
+
 }
