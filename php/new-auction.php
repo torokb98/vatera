@@ -7,9 +7,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 ?>
- 
-
-
 
 <!DOCTYPE html>
 <html lang="hu">
@@ -25,19 +22,34 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 </style>
 <head>
-	<title>Welcome</title>
+	<title>Hirdetésfeladás</title>
 </head>
 <body>
 
-    <div class="page-header" align="center">
-        <h1>Üdvözöljük, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.</h1>
-    </div>
-    <p align="center">
-		<a href="new-auction.php" class="btn btn-warning" align="center"> Hirdetésfeladás </a>
-        <a href="reset-password.php" class="btn btn-warning" align="center"> Új jelszó létrehozása </a>
-        <a href="logout.php" class="btn btn-danger" align="center"> Kijelentkezés </a>
-    </p>
+<h1>Hirdetésfeladás</h1>
 
+<form>
+	Termék neve <input type="text"><br>
+	Kategória 
+	<select name="category">
+		<option value="regi">Régiségek</option>
+		<option value="jarmu">Járművek</option>
+	</select><br>
+	Kezdő licit <input type="number"><br>
+	Leírás <textarea rows="12" cols="50"></textarea><br>
+	Képek feltöltése:<br>
+	<input type="file" name="pic1">
+	<input type="file" name="pic2">
+	<input type="file" name="pic3">
+	<input type="file" name="pic4">
+	<input type="file" name="pic5">
+	<input type="file" name="pic6"><br>
+	<input type="checkbox" id="aszf">
+	<label for="aszf">Elolvastam az és megértettem az <a href="aszf.php" target="_blank">Általános Szerződési Feltételeket</a></label><br>
+	<input type="submit" value="Hirdetésfeladás">
+
+
+</form>
 
 </body>
 </html>
