@@ -37,6 +37,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <a href="reset-password.php" class="btn btn-warning" align="center"> Új jelszó létrehozása </a>
         <a href="logout.php" class="btn btn-danger" align="center"> Kijelentkezés </a>
     </p>
+	<br><br><br>
+	<h3 align="center">
+	<?php
+	require_once "config.php";
+	$sql = "SELECT id, nev FROM termekek";
+	$result = $mysqli->query($sql);
+
+	if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+		$id = $row["id"];
+        echo "<br><a href='auction.php?id=".$id."'>". $row["nev"]. "</a><br>";
+    }
+	} else {
+    echo "Nincs aktív aukció!";
+	}
+	
+	
+	
+	?>
+	</h3>
 
 
 </body>

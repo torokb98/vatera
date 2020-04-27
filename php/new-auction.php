@@ -28,28 +28,41 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <h1>Hirdetésfeladás</h1>
 
-<form>
-	Termék neve <input type="text"><br>
+<form action="insert.php" method="post">
+	Termék neve <input type="text" name="nev" id="nev"><br>
 	Kategória 
-	<select name="category">
+	<select name="kategoria" id="kategoria">
 		<option value="regi">Régiségek</option>
 		<option value="jarmu">Járművek</option>
 	</select><br>
-	Kezdő licit <input type="number"><br>
-	Leírás <textarea rows="12" cols="50"></textarea><br>
+	Kezdő licit <input type="number" name="licit" id="licit"><br>
+	Leírás <textarea rows="12" cols="50" name="leiras" id="leiras"></textarea><br>
 	Képek feltöltése:<br>
 	<input type="file" name="pic1">
 	<input type="file" name="pic2">
 	<input type="file" name="pic3">
-	<input type="file" name="pic4">
-	<input type="file" name="pic5">
-	<input type="file" name="pic6"><br>
-	<input type="checkbox" id="aszf">
+	<br>
+	<input type="checkbox" id="aszf" onclick="enableSubmit()">
 	<label for="aszf">Elolvastam az és megértettem az <a href="aszf.php" target="_blank">Általános Szerződési Feltételeket</a></label><br>
-	<input type="submit" value="Hirdetésfeladás">
-
-
+	<input type="submit" value="Hirdetésfeladás" id="submitBtn" disabled>
+</form>
+<form action="welcome.php" method="post">
+	<input type="submit" value="Mégsem">
 </form>
 
+<script>
+
+function enableSubmit(){
+	var checkbox = document.getElementById("aszf");
+	if (checkbox.checked == true){
+		document.getElementById("submitBtn").disabled = false;
+	} else {
+		document.getElementById("submitBtn").disabled = true;
+	}
+}
+</script>
+
 </body>
+
 </html>
+
