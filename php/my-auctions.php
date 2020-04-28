@@ -6,6 +6,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+$my_username = htmlspecialchars($_SESSION["username"]);
+
 ?>
  
 
@@ -25,24 +27,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 </style>
 <head>
-	<title>Welcome</title>
+	<title>Hirdetéseim</title>
 </head>
 <body>
-
-    <div class="page-header" align="center">
-        <h1>Üdvözöljük, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.</h1>
+	<div class="page-header" align="center">
+        <h1><b><?php echo $my_username ?></b> hirdetései</h1>
     </div>
-    <p align="center">
-		<a href="new-auction.php" class="btn btn-warning" align="center"> Hirdetésfeladás </a>
-		<a href="my-auctions.php" class="btn btn-warning" align="center"> Hirdetéseim </a>
-        <a href="reset-password.php" class="btn btn-warning" align="center"> Új jelszó létrehozása </a>
-        <a href="logout.php" class="btn btn-danger" align="center"> Kijelentkezés </a>
-    </p>
 	<br><br><br>
 	<h3 align="center">
 	<?php
 	require_once "config.php";
-	$sql = "SELECT id, nev FROM termekek";
+	$sql = "SELECT id, nev FROM termekek WHERE username = '".$my_username."'";
 	$result = $mysqli->query($sql);
 
 	if ($result->num_rows > 0) {

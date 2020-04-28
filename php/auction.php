@@ -21,6 +21,7 @@ while($row = $result->fetch_assoc()) {
 	$leiras = $row["leiras"];
 	$username = $row["username"];
 }
+$mysqli->close();
 ?>
 
 <!DOCTYPE html>
@@ -44,15 +45,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <h1><?php echo $nev; ?></h1>
 <?php
-	echo $kep1;
-	echo $kep2;
-	echo $kep3."<br>";
+	echo "<img src=kepek\\".$kep1." width='300'>";
+	echo "<img src=kepek\\".$kep2." width='300'>";
+	echo "<img src=kepek\\".$kep3." width='300'><br>";
 	echo "Kategória: ".$kategoria."<br>";
 	echo "Leírás: ".$leiras."<br>";
 	echo "Aktuális licit: ".$aktualis_licit."<br>";
 	echo "Kezdőlicit: ".$kezdo_licit."<br>";
 ?>
-
+<form action="welcome.php" method="post">
+	<input type="submit" value="Vissza">
+</form>
 
 
 </body>

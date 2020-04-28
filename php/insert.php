@@ -6,18 +6,37 @@
 	$nev = $mysqli->real_escape_string($_REQUEST['nev']);
 	$kategoria = $mysqli->real_escape_string($_REQUEST['kategoria']);
 	$licit = $mysqli->real_escape_string($_REQUEST['licit']);
-	$leiras = $mysqli->real_escape_string($_REQUEST['leiras']);
-	$pic1 = $mysqli->real_escape_string($_REQUEST['pic1']);
-	$pic2 = $mysqli->real_escape_string($_REQUEST['pic2']);
-	$pic3 = $mysqli->real_escape_string($_REQUEST['pic3']);
+	$leiras = $mysqli->real_escape_string($_REQUEST['leiras']);	
+	//$pic1 = $mysqli->real_escape_string($_REQUEST['pic1']);
+	//$pic2 = $mysqli->real_escape_string($_REQUEST['pic2']);
+	//$pic3 = $mysqli->real_escape_string($_REQUEST['pic3']);
 	$uname = htmlspecialchars($_SESSION["username"]);
-	 
-	$sql = "INSERT INTO termekek (nev, kategoria, kezdo_licit, kep1, kep2, kep3, leiras, username) VALUES ('$nev', '$kategoria', '$licit', '".$pic1."', '".$pic2."', '".$pic3."', '".$leiras."', '$uname')";
+	
+	/*echo $nev."<br>";
+	echo $kategoria."<br>";
+	echo $licit."<br>";
+	echo $leiras."<br>";*/
+
+	$file_name1 = $_FILES['pic1']['name'];
+	$file_tmp1 = $_FILES['pic1']['tmp_name'];
+	move_uploaded_file($file_tmp1,"kepek\\".$file_name1);
+	
+	$file_name2 = $_FILES['pic2']['name'];
+	$file_tmp2 = $_FILES['pic2']['tmp_name'];
+	move_uploaded_file($file_tmp,"kepek\\".$file_name2);
+	
+	$file_name3 = $_FILES['pic3']['name'];
+	$file_tmp3 = $_FILES['pic3']['tmp_name'];
+	move_uploaded_file($file_tmp,"kepek\\".$file_name3);
+	
+	
+	$sql = "INSERT INTO termekek (nev, kategoria, kezdo_licit, kep1, kep2, kep3, leiras, username) VALUES ('$nev', '$kategoria', '$licit', '$file_name1', '$file_name2', '$file_name3', '$leiras', '$uname')";
 	if($mysqli->query($sql) === true){
 		echo "A hirdetése felvételre került. Automatikusan visszairányítjuk a kezdőoldalra.";
 	} else{
 		echo "HIBA: Could not able to execute $sql. " . $mysqli->error;
 	}
+	
 	 
 	$mysqli->close();
 	

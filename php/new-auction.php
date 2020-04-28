@@ -28,7 +28,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <h1>Hirdetésfeladás</h1>
 
-<form action="insert.php" method="post">
+<form enctype="multipart/form-data" action="insert.php" method="POST">
 	Termék neve <input type="text" name="nev" id="nev"><br>
 	Kategória 
 	<select name="kategoria" id="kategoria">
@@ -38,6 +38,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	Kezdő licit <input type="number" name="licit" id="licit"><br>
 	Leírás <textarea rows="12" cols="50" name="leiras" id="leiras"></textarea><br>
 	Képek feltöltése:<br>
+	<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
 	<input type="file" name="pic1">
 	<input type="file" name="pic2">
 	<input type="file" name="pic3">
@@ -65,4 +66,5 @@ function enableSubmit(){
 </body>
 
 </html>
+
 
