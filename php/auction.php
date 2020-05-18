@@ -7,10 +7,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 $id = $_GET['id'];
+$my_username = $_SESSION["username"];
 require_once "config.php";
-$sql = "SELECT * FROM termekek WHERE id=".$id;
-$result = $mysqli->query($sql);
-while($row = $result->fetch_assoc()) {
+$sql = "SELECT * FROM termekek WHERE id='$id'; ";
+$sql .= "SELECT COUNT(*) AS sorok FROM kedvencek WHERE termek_id='$id' AND username='$my_username'; ";
+//$result = $mysqli->query($sql);
+/*while($row = $result->fetch_assoc()) {
 	$nev = $row["nev"];
 	$kategoria = $row["kategoria"];
 	$kezdo_licit = $row["kezdo_licit"];
@@ -20,7 +22,43 @@ while($row = $result->fetch_assoc()) {
 	$kep3 = $row["kep3"];
 	$leiras = $row["leiras"];
 	$username = $row["username"];
+}*/
+
+if(mysqli_multi_query($mysqli, $sql)){
+	do{
+		if ($result = mysqli_store_result($mysqli)) {
+			
+			while ($row = mysqli_fetch_array($result)){
+					$sorok_szama = $row["sorok"];
+					if($sorok_szama != NULL){
+						break;
+					}
+					$nev = $row["nev"];
+					$kategoria = $row["kategoria"];
+					$kezdo_licit = $row["kezdo_licit"];
+					$aktualis_licit = $row["aktualis_licit"];
+					$kep1 = $row["kep1"];
+					$kep2 = $row["kep2"];
+					$kep3 = $row["kep3"];
+					$leiras = $row["leiras"];
+					$username = $row["username"];
+					$result->free();
+			}
+			
+		mysqli_free_result($result);
+		}
+	}while(mysqli_next_result($mysqli));
 }
+
+
+
+
+/*$sql1 = "SELECT COUNT(*) AS sorok FROM kedvencek WHERE termek_id='$id' AND username='$my_username'";
+$result1 = $mysqli->query($sql);
+if($result1->num_row >0 ){
+	$sorok_szama = $result1->fetch_assoc();
+}*/
+
 $mysqli->close();
 ?>
 
@@ -80,9 +118,15 @@ echo "</div>";
 	echo "<input type='submit' value='Licitálok'>";
 	echo "</form>";
 	//kedvencek
-	echo "<form enctype='multipart/form-data' action='add_star.php?id=".$id."' method='post'>";
-	echo "<input type='submit' value='Hozzáadás a kedvencekhez'>";
-	echo "</form>";
+	if($sorok_szama == 0){
+		echo "<form enctype='multipart/form-data' action='add_star.php?id=".$id."' method='post'>";
+		echo "<input type='submit' value='Hozzáadás a kedvencekhez'>";
+		echo "</form>";
+	}else{
+		echo "<form enctype='multipart/form-data' action='remove_star.php?id=".$id."' method='post'>";
+		echo "<input type='submit' value='Eltávolítás a kedvencek közül'>";
+		echo "</form>";
+	}
 ?>
 
 <form action="welcome.php" method="post" style='position:absolute;bottom:50px;left:10px;'>
