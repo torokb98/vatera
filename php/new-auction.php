@@ -32,10 +32,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	Termék neve <input type="text" name="nev" id="nev"><br>
 	Kategória 
 	<select name="kategoria" id="kategoria">
-		<option value="regi">Régiségek</option>
-		<option value="jarmu">Járművek</option>
+		<option value="Régiség">Régiségek</option>
+		<option value="Jármű">Járművek</option>
 	</select><br>
-	Kezdő licit <input type="number" name="licit" id="licit"><br>
+	Kezdő licit <input type="number" name="licit" id="licit" onchange="enableSubmit()"> <p hidden name="hiba" id="hiba">Nem megfelelő a kezdő licit.  </p> <br>
 	Leírás <textarea rows="12" cols="50" name="leiras" id="leiras"></textarea><br>
 	Képek feltöltése:<br>
 	<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
@@ -53,18 +53,35 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <script>
 
+
 function enableSubmit(){
 	var checkbox = document.getElementById("aszf");
-	if (checkbox.checked == true){
-		document.getElementById("submitBtn").disabled = false;
-	} else {
-		document.getElementById("submitBtn").disabled = true;
+	if(document.getElementById("licit").value <= 0)
+	{
+	    document.getElementById("hiba").hidden = false;
+	    if(checkbox.checked == true){
+	        document.getElementById("submitBtn").disabled = true;
+	    }
+
 	}
+	else{
+	    document.getElementById("hiba").hidden = true;
+	    if (checkbox.checked == true){
+        	    document.getElementById("submitBtn").disabled = false;
+        	} else {
+        		document.getElementById("submitBtn").disabled = true;
+        	}
+
+	}
+
 }
 </script>
 
 </body>
 
 </html>
+
+
+
 
 

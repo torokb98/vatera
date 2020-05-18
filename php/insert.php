@@ -23,11 +23,11 @@
 	
 	$file_name2 = $_FILES['pic2']['name'];
 	$file_tmp2 = $_FILES['pic2']['tmp_name'];
-	move_uploaded_file($file_tmp,"kepek\\".$file_name2);
+	move_uploaded_file($file_tmp2,"kepek\\".$file_name2);
 	
 	$file_name3 = $_FILES['pic3']['name'];
 	$file_tmp3 = $_FILES['pic3']['tmp_name'];
-	move_uploaded_file($file_tmp,"kepek\\".$file_name3);
+	move_uploaded_file($file_tmp3,"kepek\\".$file_name3);
 	
 	
 	$sql = "INSERT INTO termekek (nev, kategoria, kezdo_licit, kep1, kep2, kep3, leiras, username) VALUES ('$nev', '$kategoria', '$licit', '$file_name1', '$file_name2', '$file_name3', '$leiras', '$uname')";
