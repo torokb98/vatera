@@ -48,7 +48,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 			echo "<tr>";
 			echo "<td><a href='auction.php?id=".$id."'><img src=kepek\\".$row["kep1"]." width='200' ></a></td>";
 			echo "<td><a href='auction.php?id=".$id."'>".$row["nev"]."</a></td>";
-			echo "<td><a href='edit_auction.php?id=".$id."'>Szerkesztés</a></td>";
+			echo "<td><a href='edit_auction.php?id=".$id."'>Szerkesztés</a>";
+			echo "<br><a href='delete.php?id=".$id."'>Törlés</a></td>";
 			echo "</tr>";
 		}
 		echo "</table>";

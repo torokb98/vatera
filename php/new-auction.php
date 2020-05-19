@@ -6,6 +6,22 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+date_default_timezone_set("Europe/Budapest");
+//aktuális dátum
+$aktualis_datum = date("Y-m-d")."T".date("H:i");
+
+//aktuális dátum + 7nap
+$nap7d = strtotime("+7 day");
+$nap7d = date("Y-m-d", $nap7d);
+$ido7d = date("H:i");
+$datum7d = $nap7d."T".$ido7d;
+
+//aktuális dátum + 1év
+$nap1y = strtotime("+1 year");
+$nap1y = date("Y-m-d", $nap1y);
+$ido1y = date("H:i");
+$datum1y = $nap1y."T".$ido1y;
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +52,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 		<option value="Jármű">Járművek</option>
 	</select><br>
 	Kezdő licit <input type="number" name="licit" id="licit" onchange="enableSubmit()"> <p hidden name="hiba" id="hiba">Nem megfelelő a kezdő licit.  </p> <br>
-	Aukció vége <input type="datetime-local" name="aukcio_vege" id="aukcio_vege" value="2020-12-31T12:00:00"><br>
+	Aukció vége <input type="datetime-local" name="aukcio_vege" id="aukcio_vege" value="<?php echo $datum7d; ?>" min="<?php echo $aktualis_datum?>" max="<?php echo $datum1y; ?>"><br>
 	Leírás <textarea rows="12" cols="50" name="leiras" id="leiras"></textarea><br>
 	Képek feltöltése:<br>
 	<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
@@ -76,6 +92,8 @@ function enableSubmit(){
 	}
 
 }
+
+
 </script>
 
 </body>
