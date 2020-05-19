@@ -42,6 +42,7 @@ if(mysqli_multi_query($mysqli, $sql)){
 					$kep3 = $row["kep3"];
 					$leiras = $row["leiras"];
 					$username = $row["username"];
+					$aukcio_vege = $row["aukcio_vege"];
 					$result->free();
 			}
 			
@@ -117,6 +118,8 @@ echo "</div>";
 	echo "Mennyit ér neked? <input type='number' name='uj_licit' id='uj_licit'>";
 	echo "<input type='submit' value='Licitálok'>";
 	echo "</form>";
+	//aukció vége
+	echo "Hátralévő idő: <p id='visszaszamlalo'></p>";
 	//kedvencek
 	if($sorok_szama == 0){
 		echo "<form enctype='multipart/form-data' action='add_star.php?id=".$id."' method='post'>";
@@ -135,6 +138,43 @@ echo "</div>";
 
 
 </body>
+
+<script>
+// Set the date we're counting down to
+
+var end = "<?php echo $aukcio_vege ?>";
+
+var countDownDate = new Date(end).getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="visszaszamlalo"
+  document.getElementById("visszaszamlalo").innerHTML = days + "nap " + hours + "óra "
+  + minutes + "perc " + seconds + "másodperc ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("visszaszamlalo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
+
+
 
 </html>
 

@@ -34,26 +34,33 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <h1><b><?php echo $my_username ?></b> hirdetései</h1>
     </div>
 	<br><br><br>
-	<h3 align="center">
+	<!--h3 align="center"-->
 	<?php
 	require_once "config.php";
-	$sql = "SELECT id, nev FROM termekek WHERE username = '".$my_username."'";
+	$sql = "SELECT id, nev, kep1 FROM termekek WHERE username = '".$my_username."'";
 	$result = $mysqli->query($sql);
 
 	if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-		$id = $row["id"];
-        echo "<br><a href='auction.php?id=".$id."'>". $row["nev"]. "</a><br>";
-    }
+		// output data of each row
+		echo "<table>";
+		while($row = $result->fetch_assoc()) {
+			$id = $row["id"];
+			echo "<tr>";
+			echo "<td><a href='auction.php?id=".$id."'><img src=kepek\\".$row["kep1"]." width='200' ></a></td>";
+			echo "<td><a href='auction.php?id=".$id."'>".$row["nev"]."</a></td>";
+			echo "<td><a href='edit_auction.php?id=".$id."'>Szerkesztés</a></td>";
+			echo "</tr>";
+		}
+		echo "</table>";
 	} else {
-    echo "Nincs aktív aukció!";
+		echo "<h3 align='center'>Nincs aktív aukció!</h3>";
 	}
+	
 	
 	$mysqli->close();
 	
 	?>
-	</h3>
+	<!--/h3-->
 
 
 </body>

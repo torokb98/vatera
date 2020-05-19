@@ -50,26 +50,31 @@ body{
         <a href="logout.php" class="btn btn-danger" align="center"> Kijelentkezés </a>
     </h4>
 	<br><br><br>
-	<h3 align="center">
+	
 	<?php 
 	require_once "config.php";
-	$sql = "SELECT id, nev FROM termekek";
+	$sql = "SELECT id, nev, kep1 FROM termekek";
 	$result = $mysqli->query($sql);
 
 	if ($result->num_rows > 0) {
     // output data of each row
+	echo "<table>";
     while($row = $result->fetch_assoc()) {
 		$id = $row["id"];
-        echo "<br><a  href='auction.php?id=".$id."'><font color=blue><b>". $row["nev"]. "</b></a><br>";
+        echo "<tr>";
+		echo "<td><a href='auction.php?id=".$id."'><img src=kepek\\".$row["kep1"]." width='200' ></a></td>";
+		echo "<td><a href='auction.php?id=".$id."'>".$row["nev"]."</a></td>";
+		echo "</tr>";
     }
+	echo "</table>";
 	} else {
-    echo "Nincs aktív aukció!";
+    echo "<h3 align='center'>Nincs aktív aukció!</h3>";
 	}
 	
 	$mysqli->close();
 	
 	?>
-	</h3>
+	
 
 
 </body>

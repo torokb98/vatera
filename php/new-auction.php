@@ -36,6 +36,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 		<option value="Jármű">Járművek</option>
 	</select><br>
 	Kezdő licit <input type="number" name="licit" id="licit" onchange="enableSubmit()"> <p hidden name="hiba" id="hiba">Nem megfelelő a kezdő licit.  </p> <br>
+	Aukció vége <input type="datetime-local" name="aukcio_vege" id="aukcio_vege" value="2020-12-31T12:00:00"><br>
 	Leírás <textarea rows="12" cols="50" name="leiras" id="leiras"></textarea><br>
 	Képek feltöltése:<br>
 	<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />

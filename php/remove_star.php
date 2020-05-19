@@ -18,6 +18,6 @@
 	$mysqli->close();
 	
 	
-	header( "refresh:5;url=auction.php?id=".$id );
+	header( "refresh:5;url=stars.php" );
 
 ?>

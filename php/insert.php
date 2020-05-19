@@ -6,6 +6,8 @@
 	$nev = $mysqli->real_escape_string($_REQUEST['nev']);
 	$kategoria = $mysqli->real_escape_string($_REQUEST['kategoria']);
 	$licit = $mysqli->real_escape_string($_REQUEST['licit']);
+	$vege = $mysqli->real_escape_string($_REQUEST['aukcio_vege']);
+	$aukcio_vege = str_replace("T", " ", $vege);
 	$leiras = $mysqli->real_escape_string($_REQUEST['leiras']);	
 	//$pic1 = $mysqli->real_escape_string($_REQUEST['pic1']);
 	//$pic2 = $mysqli->real_escape_string($_REQUEST['pic2']);
@@ -30,7 +32,7 @@
 	move_uploaded_file($file_tmp3,"kepek\\".$file_name3);
 	
 	
-	$sql = "INSERT INTO termekek (nev, kategoria, kezdo_licit, kep1, kep2, kep3, leiras, username) VALUES ('$nev', '$kategoria', '$licit', '$file_name1', '$file_name2', '$file_name3', '$leiras', '$uname')";
+	$sql = "INSERT INTO termekek (nev, kategoria, kezdo_licit, aukcio_vege, kep1, kep2, kep3, leiras, username) VALUES ('$nev', '$kategoria', '$licit', '$aukcio_vege', '$file_name1', '$file_name2', '$file_name3', '$leiras', '$uname')";
 	if($mysqli->query($sql) === true){
 		echo "A hirdetése felvételre került. Automatikusan visszairányítjuk a kezdőoldalra.";
 	} else{
