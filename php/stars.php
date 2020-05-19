@@ -37,7 +37,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	
 	<?php
 	require_once "config.php";
-	$sql = "SELECT id, nev, kep1 FROM termekek WHERE username = '".$my_username."'";
+	$sql = "SELECT id, nev, kep1 FROM termekek WHERE id=(SELECT termek_id FROM kedvencek WHERE username = '".$my_username."')";
 	$result = $mysqli->query($sql);
 
 	if ($result->num_rows > 0) {
