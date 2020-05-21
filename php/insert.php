@@ -32,7 +32,7 @@
 	move_uploaded_file($file_tmp3,"kepek\\".$file_name3);
 	
 	
-	$sql = "INSERT INTO termekek (nev, kategoria, kezdo_licit, aukcio_vege, kep1, kep2, kep3, leiras, username) VALUES ('$nev', '$kategoria', '$licit', '$aukcio_vege', '$file_name1', '$file_name2', '$file_name3', '$leiras', '$uname')";
+	$sql = "INSERT INTO termekek (nev, kategoria, kezdo_licit, aktualis_licit, aukcio_vege, kep1, kep2, kep3, leiras, username) VALUES ('$nev', '$kategoria', '$licit', '$licit', '$aukcio_vege', '$file_name1', '$file_name2', '$file_name3', '$leiras', '$uname')";
 	if($mysqli->query($sql) === true){
 		echo "A hirdetése felvételre került. Automatikusan visszairányítjuk a kezdőoldalra.";
 	} else{

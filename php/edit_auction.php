@@ -99,12 +99,11 @@ body{
 	<br>
 	
 	<input type="submit" value="Hirdetés módosítása" id="submitBtn">
+	<br>
 </form>
 <form action="my-auctions.php" method="post">
 	<input type="submit" value="Mégsem">
-</form>
-<form action="welcome.php" method="post" style='position:absolute;bottom:50px;left:10px;'>
-	<input type="submit" value="Vissza a főmenübe">
+	<br>
 </form>
 
 

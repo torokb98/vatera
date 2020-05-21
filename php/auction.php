@@ -43,6 +43,7 @@ if(mysqli_multi_query($mysqli, $sql)){
 					$leiras = $row["leiras"];
 					$username = $row["username"];
 					$aukcio_vege = $row["aukcio_vege"];
+					$nyertes = $row["nyertes_user"];
 					$result->free();
 			}
 			
@@ -112,7 +113,8 @@ echo "</div>";
 	echo "Leírás: ".$leiras."<br>";
 	echo "Aktuális licit: ".$aktualis_licit."<br>";
 	echo "Kezdőlicit: ".$kezdo_licit."<br>";
-	echo "</div>";
+	echo "Nyertes user: ".$nyertes."<br>";
+echo "</div>";
 	//licitálás
 	echo "<form enctype='multipart/form-data' action='bid.php?id=".$id."' method='post'>";
 	echo "Mennyit ér neked? <input type='number' name='uj_licit' id='uj_licit'>";
@@ -125,24 +127,31 @@ echo "</div>";
 		echo "<form enctype='multipart/form-data' action='add_star.php?id=".$id."' method='post'>";
 		echo "<input type='submit' value='Hozzáadás a kedvencekhez'>";
 		echo "</form>";
+
 	}else{
 		echo "<form enctype='multipart/form-data' action='remove_star.php?id=".$id."' method='post'>";
 		echo "<input type='submit' value='Eltávolítás a kedvencek közül'>";
 		echo "</form>";
 	}
+	
+		echo "<form action='welcome.php' method='post'>";
+		echo "	";
+		echo "<input type='submit' value='Vissza a főmenübe'>";
+		echo "</form>";
+
 ?>
 
-<form action="welcome.php" method="post" style='position:absolute;bottom:50px;left:10px;'>
-	<input type="submit" value="Vissza a főmenübe">
-</form>
-
-
 </body>
+
+
+
+
 
 <script>
 // Set the date we're counting down to
 
 var end = "<?php echo $aukcio_vege ?>";
+
 
 var countDownDate = new Date(end).getTime();
 
@@ -168,12 +177,14 @@ var x = setInterval(function() {
   // If the count down is finished, write some text
   if (distance < 0) {
     clearInterval(x);
-    document.getElementById("visszaszamlalo").innerHTML = "EXPIRED";
+    document.getElementById("visszaszamlalo").innerHTML = "LEJÁRT";		
   }
 }, 1000);
+
+
+
+
 </script>
-
-
 
 
 </html>

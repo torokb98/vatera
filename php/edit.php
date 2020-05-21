@@ -27,7 +27,7 @@
 	
 	$sql = "UPDATE termekek SET nev='$nev', kategoria='$kategoria', aukcio_vege='$aukcio_vege', leiras='$leiras' WHERE id=$id";
 	if($mysqli->query($sql) === true){
-		echo "A hirdetése módosítása megtörtént. Automatikusan visszairányítjuk a hirdetéseihez.";
+		echo "A hirdetés módosítása megtörtént. Automatikusan visszairányítjuk a hirdetéseihez.";
 	} else{
 		echo "HIBA: Could not able to execute $sql. " . $mysqli->error;
 	}

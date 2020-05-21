@@ -61,7 +61,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	
 	?>
 	
-
+<form action="welcome.php" method="post" style='position:absolute;bottom:50px;left:10px;'>
+<input type="submit" value="Vissza a főmenübe">
+</form>
 
 </body>
 </html>
