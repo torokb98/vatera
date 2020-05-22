@@ -36,22 +36,47 @@ $datum1y = $nap1y."T".$ido1y;
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 3px;
+  background-color: Black;
+  color: white;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
 </style>
 <head>
 	<title>Hirdetésfeladás</title>
 </head>
 <body>
-
+<div id="page-container">
+<div id="content-wrap">
 <h1>Hirdetésfeladás</h1>
 
 <form enctype="multipart/form-data" action="insert.php" method="POST">
 	Termék neve <input type="text" name="nev" id="nev"><br>
 	Kategória 
 	<select name="kategoria" id="kategoria">
-		<option value="Régiség">Régiségek</option>
-		<option value="Jármű">Járművek</option>
-	</select><br>
-	Kezdő licit <input type="number" name="licit" id="licit" onchange="enableSubmit()"> <p hidden name="hiba" id="hiba">Nem megfelelő a kezdő licit.  </p> <br>
+		<option value="x" hidden selected>Kérjük válasszon</option>
+		<option value="Műszaki cikk">Műszaki cikk</option>
+		<option value="Régiség">Régiség</option>
+		<option value="Jármű">Jármű</option>
+		<option value="Divat">Divat</option>
+		<option value="Sport">Sport</option>
+		<option value="Egyéb">Egyéb</option>
+	</select> <b hidden name="hiba2" id="hiba2">Kérjük válasszon kategóriát!  </b> <br>
+	Kezdő licit <input type="number" name="licit" id="licit" onchange="enableSubmit()"> <b hidden name="hiba" id="hiba">Nem megfelelő a kezdő licit.  </b> <br>
 	Aukció vége <input type="datetime-local" name="aukcio_vege" id="aukcio_vege" value="<?php echo $datum7d; ?>" min="<?php echo $aktualis_datum?>" max="<?php echo $datum1y; ?>"><br>
 	Leírás <textarea rows="12" cols="50" name="leiras" id="leiras"></textarea><br>
 	Képek feltöltése:<br>
@@ -67,6 +92,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <form action="welcome.php" method="post">
 	<input type="submit" value="Mégsem">
 </form>
+
 
 <script>
 
@@ -95,7 +121,11 @@ function enableSubmit(){
 
 
 </script>
-
+<div>
+<footer>
+	<p>Pannon Egyetem 2020</p>
+</footer>
+<div>
 </body>
 
 </html>

@@ -41,12 +41,32 @@ table, th, td {
   border: 1px solid black;
 }
 
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 3px;
+  background-color: Black;
+  color: white;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
 </style>
 <head>
 	<title>Welcome</title>
 </head>
 <body>
-
+<div id="page-container">
+<div id="content-wrap">
 
 
 
@@ -74,33 +94,72 @@ table, th, td {
 	
 	<?php 
 	require_once "config.php";
-	$sql = "SELECT id, nev, kep1, aktualis_licit FROM termekek";
-	$alap = $nevasc = $nevdesc = $arasc = $ardesc = " ";
+	$sql = "SELECT id, nev, kep1, aktualis_licit FROM termekek WHERE lejart=0";
+	$alap = $nevasc = $nevdesc = $arasc = $ardesc = "";
+	$osszes = $muszaki = $regi = $jarmu = $divat = $sport = $egyeb = "";
+	$check = "";
 	
-	if ($_GET['keres'] != null)
+	
+	if ($_GET['keres'] != null && $_GET['leiras'] == "igen")
 	{
-		$sql .= " WHERE nev like '%".$_GET['keres']."%' ";
+		$sql .= " AND nev like '%".$_GET['keres']."%' ";
+		$sql .= " OR leiras like '%".$_GET['keres']."%' ";
+		$check = " checked";
+	}
+	elseif ($_GET['keres'] != null)
+	{
+		$sql .= " AND nev like '%".$_GET['keres']."%' ";
 	}
 	
-	if ($_GET['rendez'] == 'nev ASC')
-	{
-		$sql .= " ORDER BY nev ASC";
-		$nevasc = " selected";
+		switch ($_GET['kategoria']){
+		case 'ossz':
+			$osszes = " selected";
+			break;
+		case 'muszaki':
+			$sql .= " AND kategoria='Műszaki cikk'";
+			$muszaki = " selected";
+			break;
+		case 'regiseg':
+			$sql .= " AND kategoria='Régiség'";
+			$regi = " selected";
+			break;
+		case 'jarmu':
+			$sql .= " AND kategoria='Jármű'";
+			$jarmu = " selected";
+			break;
+		case 'divat':
+			$sql .= " AND kategoria='Divat'";
+			$divat = " selected";
+			break;
+		case 'sport':
+			$sql .= " AND kategoria='Sport'";
+			$sport = " selected";
+			break;
+		case 'egyeb':
+			$sql .= " AND kategoria='Egyéb'";
+			$egyeb = " selected";
+			break;
 	}
-	elseif ($_GET['rendez'] == 'nev DESC')
-	{
-		$sql .= " ORDER BY nev DESC";
-		$nevdesc = " selected";
-	}
-	elseif ($_GET['rendez'] == 'ar ASC')
-	{
-		$sql .= " ORDER BY aktualis_licit ASC";
-		$arasc = " selected";
-	}
-	elseif ($_GET['rendez'] == 'ar DESC')
-	{
-		$sql .= " ORDER BY aktualis_licit DESC";
-		$ardesc = " selected";
+	
+	
+	
+	switch ($_GET['rendez']){
+		case 'nev ASC':
+			$sql .= " ORDER BY nev ASC";
+			$nevasc = " selected";
+			break;
+		case 'nev DESC':
+			$sql .= " ORDER BY nev DESC";
+			$nevdesc = " selected";
+			break;
+		case 'ar ASC':
+			$sql .= " ORDER BY aktualis_licit ASC";
+			$arasc = " selected";
+			break;
+		case 'ar DESC':
+			$sql .= " ORDER BY aktualis_licit DESC";
+			$ardesc = " selected";
+			break;
 	}
 	
 	
@@ -108,22 +167,37 @@ table, th, td {
 	$result = $mysqli->query($sql);
 ?>
 
-	<form action="welcome.php">
-	  <label for="rendez">Rendezés:</label>
-	  <select id="rendez" name="rendez">
+<form action="welcome.php">
+	<label for="rendez">Rendezés:</label>
+	<select id="rendez" name="rendez">
 		<option value="def" <?php echo $alap; ?>>Alapértelmezett</option>
 		<option value="nev ASC" <?php echo $nevasc; ?>>ABC szerint növekvő</option>
 		<option value="nev DESC" <?php echo $nevdesc; ?>>ABC szerint csökkenő</option>
 		<option value="ar ASC" <?php echo $arasc; ?>>Ár szerint növekvő</option>
 		<option value="ar DESC" <?php echo $ardesc; ?>>Ár szerint csökkenő</option>
-	  </select>
-	  <input type="submit" value="Rendezés">
-	</form><br>
-	<form action="welcome.php">
-		<label for="keres">Keresés:</label>
-		<input id="keres" name="keres" type="text" <?php echo "value=".$_GET['keres']; ?>>
-		<input type="submit" value="Keresés">
-	</form><br>
+	</select>
+	<input type="submit" value="Rendezés">
+
+	<label for="keres">Keresés:</label>
+	<input id="keres" name="keres" type="text" <?php echo "value=".$_GET['keres']; ?>>
+	
+	<label for="kat">Kategória:</label>
+	<select name="kategoria" id="kategoria">
+		<option value="ossz" <?php echo $osszes; ?>>Összes</option>
+		<option value="muszaki" <?php echo $muszaki; ?>>Műszaki cikk</option>
+		<option value="regiseg" <?php echo $regi; ?>>Régiség</option>
+		<option value="jarmu" <?php echo $jarmu; ?>>Jármű</option>
+		<option value="divat" <?php echo $divat; ?>>Divat</option>
+		<option value="sport" <?php echo $sport; ?>>Sport</option>
+		<option value="egyeb" <?php echo $egyeb; ?>>Egyéb</option>
+	</select>
+	<input type="checkbox" id="leiras" value="igen" name="leiras" <?php echo $check; ?>>
+	<label for="leiras">Keresés a leírésban is</label>
+	<input type="submit" value="Keresés">
+</form>
+<form action="welcome.php">
+	<input type="submit" value="Feltételek törlése">
+</form><br>
 
 <?php
 
@@ -152,7 +226,11 @@ table, th, td {
 	
 	?>
 	
-
-
+<br><br>
+<div>
+<footer>
+	<p>Pannon Egyetem 2020</p>
+</footer>
+<div>
 </body>
 </html>

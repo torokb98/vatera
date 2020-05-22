@@ -85,12 +85,33 @@ body{
   background-color:#464646;
 
 }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 3px;
+  background-color: Black;
+  color: white;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
 </style>
 
 <head>
 	<title><?php echo $nev; ?></title>
 </head>
 <body>
+<div id="page-container">
+<div id="content-wrap">
 <div  style="text-align:center">
 <h1><?php echo $nev; ?></h1>
 </div>
@@ -116,7 +137,7 @@ echo "</div>";
 	echo "Nyertes user: ".$nyertes."<br>";
 echo "</div>";
 	//licitálás
-	echo "<form enctype='multipart/form-data' action='bid.php?id=".$id."' method='post'>";
+	echo "<form onsubmit='return hibasLicit()' enctype='multipart/form-data' action='bid.php?id=".$id."' method='post'>";
 	echo "Mennyit ér neked? <input type='number' name='uj_licit' id='uj_licit'>";
 	echo "<input type='submit' value='Licitálok'>";
 	echo "</form>";
@@ -140,7 +161,12 @@ echo "</div>";
 		echo "</form>";
 
 ?>
+</div>
+<footer>
+	<p>Pannon Egyetem 2020</p>
+</footer>
 
+</div>
 </body>
 
 
@@ -181,7 +207,14 @@ var x = setInterval(function() {
   }
 }, 1000);
 
-
+function hibasLicit(){
+	var aktualis_licit = <?php echo $aktualis_licit;?>;
+	if(document.getElementById("uj_licit").value <= aktualis_licit){
+		alert("A licti nem lehet kevesebb, vagy egyenlő, mint az aktuális licit!");
+		return false;
+	}
+	return true;
+}
 
 
 </script>

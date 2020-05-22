@@ -4,9 +4,10 @@
 	require_once "config.php";
 
 	$id = $_GET['id'];
+	$my_username = $_SESSION["username"];
 	
 	$sql = "SELECT kep1, kep2, kep3 FROM termekek WHERE id=$id; ";
-	$sql .= "DELETE FROM termekek WHERE id=$id; ";
+	$sql .= "DELETE FROM termekek WHERE id=$id AND username='$my_username'; ";
 	if(mysqli_multi_query($mysqli, $sql)){
 		do{
 			if ($result = mysqli_store_result($mysqli)) {

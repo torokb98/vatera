@@ -22,14 +22,41 @@ $my_username = htmlspecialchars($_SESSION["username"]);
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
-.fa-anchor,.fa-coffee {font-size:200px}
+.fa-anchor,.fa-coffee {font-size:200px
+
+table, th, td {
+  border: 1px solid black;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 3px;
+  background-color: Black;
+  color: white;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
 </style>
 <head>
 	<title>Hirdetéseim</title>
 </head>
 <body>
+<div id="page-container">
+<div id="content-wrap">
 	<div class="page-header" align="center">
         <h1><b><?php echo $my_username ?></b> hirdetései</h1>
     </div>
@@ -42,11 +69,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 	if ($result->num_rows > 0) {
 		// output data of each row
-		echo "<table>";
+		echo "<table align='center' width='75%'>";
 		while($row = $result->fetch_assoc()) {
 			$id = $row["id"];
 			echo "<tr>";
-			echo "<td><a href='auction.php?id=".$id."'><img src=kepek\\".$row["kep1"]." width='200' ></a></td>";
+			if($row['kep1'] != null){
+				echo "<td width='300px'><a href='auction.php?id=".$id."'><img src=kepek\\".$row["kep1"]." width='200'></a></td>";
+			}
+			else{
+				echo "<td width='300px'><a href='auction.php?id=".$id."'><img src=nincs-kep.jpg width='200'></a></td>";
+			}
 			echo "<td><a href='auction.php?id=".$id."'>".$row["nev"]."</a></td>";
 			echo "<td><a href='edit_auction.php?id=".$id."'>Szerkesztés</a>";
 			echo "<br><a href='delete.php?id=".$id."'>Törlés</a></td>";
@@ -58,6 +90,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 	}
 	
 	
+	
+	
 	$mysqli->close();
 	
 	?>
@@ -65,8 +99,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <form action="welcome.php" method="post" style='position:absolute;bottom:50px;left:10px;'>
 <input type="submit" value="Vissza a főmenübe">
 </form>
-	<!--/h3-->
-
+<div>
+<footer>
+	<p>Pannon Egyetem 2020</p>
+</footer>
+<div>
 
 </body>
 </html>

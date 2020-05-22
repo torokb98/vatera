@@ -80,19 +80,44 @@ body{
   background-color:#464646;
 
 }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 3px;
+  background-color: Black;
+  color: white;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
 </style>
 
 <head>
 	<title><?php echo $nev; ?> szerkesztése</title>
 </head>
 <body>
+<div id="page-container">
+<div id="content-wrap">
 <h1>Hirdetés szerkesztése</h1>
 <form enctype="multipart/form-data" action="edit.php?id=<?php echo $id; ?>" method="POST">
 	Termék neve <input type="text" name="nev" id="nev" value="<?php echo $nev; ?>"><br>
 	Kategória 
-	<select name="kategoria" id="kategoria" value="<?php echo $kategoria; ?>">
-		<option value="Régiség">Régiségek</option>
-		<option value="Jármű">Járművek</option>
+	<select name="kategoria" id="kategoria">
+		<option value="Műszaki cikk">Műszaki cikk</option>
+		<option value="Régiség">Régiség</option>
+		<option value="Jármű">Jármű</option>
+		<option value="Divat">Divat</option>
+		<option value="Sport">Sport</option>
+		<option value="Egyéb">Egyéb</option>
 	</select><br>
 	Aukció vége <input type="datetime-local" name="aukcio_vege" id="aukcio_vege" value="<?php echo $datum7d; ?>" min="<?php echo $aktualis_datum?>" max="<?php echo $datum1y; ?>"><br>
 	Leírás <textarea rows="12" cols="50" name="leiras" id="leiras"><?php echo $leiras; ?></textarea><br>
@@ -105,8 +130,11 @@ body{
 	<input type="submit" value="Mégsem">
 	<br>
 </form>
-
-
+<div>
+<footer>
+	<p>Pannon Egyetem 2020</p>
+</footer>
+<div>
 
 </body>
 

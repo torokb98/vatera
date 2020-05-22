@@ -4,6 +4,7 @@
 	require_once "config.php";
 
 	$id = $_GET['id'];
+	$my_username = $_SESSION["username"];
 	
 	$nev = $mysqli->real_escape_string($_REQUEST['nev']);
 	$kategoria = $mysqli->real_escape_string($_REQUEST['kategoria']);
@@ -25,7 +26,7 @@
 	move_uploaded_file($file_tmp3,"kepek\\".$file_name3);*/
 	
 	
-	$sql = "UPDATE termekek SET nev='$nev', kategoria='$kategoria', aukcio_vege='$aukcio_vege', leiras='$leiras' WHERE id=$id";
+	$sql = "UPDATE termekek SET nev='$nev', kategoria='$kategoria', aukcio_vege='$aukcio_vege', leiras='$leiras' WHERE id=$id AND username='$my_username'";
 	if($mysqli->query($sql) === true){
 		echo "A hirdetés módosítása megtörtént. Automatikusan visszairányítjuk a hirdetéseihez.";
 	} else{

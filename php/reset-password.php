@@ -70,12 +70,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 3px;
+  background-color: Black;
+  color: white;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
 </style>
 <head>
 	<title>Welcome</title>
 </head>
 <body>
-
+<div id="page-container">
+<div id="content-wrap">
     <div class="wrapper" align="center">
         <h2>Jelszó visszaállítása</h2>
         <p>Töltse ki az mezőket új jelszó létrehozásához</p>
@@ -97,6 +117,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         </form>
     </div>  
 
-
+<div>
+<footer>
+	<p>Pannon Egyetem 2020</p>
+</footer>
+<div>
 </body>
 </html>
