@@ -94,6 +94,24 @@ footer {
 	<title>Welcome</title>
 </head>
 <body>
+
+
+	<div class="w3-top">
+	  <div class="w3-bar w3-black w3-card w3-center w3-large">
+		
+		<a href="welcome.php" class="w3-bar-item w3-button w3-padding-large w3-white">Kezdőoldal</a>
+		<a href="new-auction.php" class="w3-bar-item w3-button w3-padding-large w3-white">Hirdetesfeladás</a>
+		<a href="my-auctions.php" class="w3-bar-item w3-button w3-padding-large w3-white">Hirdetéseim</a>
+		<a href="stars.php" class="w3-bar-item w3-button w3-padding-large w3-white">Kedvenceim</a>
+		<a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">Új jelszó létrehozása</a>
+		<a href="logout.php" class="w3-bar-item w3-button w3-padding-large w3-white">Kijelentkezés</a>
+	  </div>
+
+	</div>
+
+
+
+
 <div id="page-container">
 <div id="content-wrap">
     <div class="wrapper" align="center">

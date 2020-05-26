@@ -39,7 +39,11 @@ body{
 
 table, th, td {
   border: 1px solid black;
+  background-color: white;
 }
+
+
+
 
 footer {
   position: absolute;
@@ -50,6 +54,7 @@ footer {
   background-color: Black;
   color: white;
 }
+
 
 #page-container {
   position: relative;
@@ -75,6 +80,7 @@ footer {
 	<div class="w3-top">
 	  <div class="w3-bar w3-black w3-card w3-center w3-large">
 		
+		<a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">Kezdőoldal</a>
 		<a href="new-auction.php" class="w3-bar-item w3-button w3-padding-large w3-white">Hirdetesfeladás</a>
 		<a href="my-auctions.php" class="w3-bar-item w3-button w3-padding-large w3-white">Hirdetéseim</a>
 		<a href="stars.php" class="w3-bar-item w3-button w3-padding-large w3-white">Kedvenceim</a>
@@ -167,7 +173,7 @@ footer {
 	$result = $mysqli->query($sql);
 ?>
 
-<form action="welcome.php">
+<form align='center' action="welcome.php">
 	<label for="rendez">Rendezés:</label>
 	<select id="rendez" name="rendez">
 		<option value="def" <?php echo $alap; ?>>Alapértelmezett</option>
@@ -192,10 +198,13 @@ footer {
 		<option value="egyeb" <?php echo $egyeb; ?>>Egyéb</option>
 	</select>
 	<input type="checkbox" id="leiras" value="igen" name="leiras" <?php echo $check; ?>>
-	<label for="leiras">Keresés a leírésban is</label>
+	<label for="leiras">Keresés a leírásban is</label>
+	<br>
 	<input type="submit" value="Keresés">
+	
 </form>
-<form action="welcome.php">
+
+<form align='center' action="welcome.php">
 	<input type="submit" value="Feltételek törlése">
 </form><br>
 
@@ -208,10 +217,10 @@ footer {
 		$id = $row["id"];
         echo "<tr>";
 		if($row['kep1'] != null){
-			echo "<td width='300px'><a href='auction.php?id=".$id."'><img src=kepek\\".$row["kep1"]." width='200'></a></td>";
+			echo "<td align='center' width='300px'><a href='auction.php?id=".$id."'><img src=kepek\\".$row["kep1"]." width='200'></a></td>";
 		}
 		else{
-			echo "<td width='300px'><a href='auction.php?id=".$id."'><img src=nincs-kep.jpg width='200'></a></td>";
+			echo "<td align='center' width='300px'><a href='auction.php?id=".$id."'><img src=nincs-kep.jpg width='200'></a></td>";
 		}
 		echo "<td><a href='auction.php?id=".$id."'>".$row["nev"]."</a></td>";
 		echo "<td>".$row["aktualis_licit"]." Ft</td>";
@@ -231,6 +240,6 @@ footer {
 <footer>
 	<p>Pannon Egyetem 2020</p>
 </footer>
-<div>
+</div>
 </body>
 </html>

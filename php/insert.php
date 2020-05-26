@@ -31,7 +31,13 @@
 	$file_tmp3 = $_FILES['pic3']['tmp_name'];
 	move_uploaded_file($file_tmp3,"kepek\\".$file_name3);
 	
+	if($kategoria=="Kérjük válasszon" || $kategoria=="x")
+	{
+		echo "Nem választott kategóriát! Visszairányítjuk az előző oldalra.";
+		header( "refresh:5;url=new-auction.php" );
+	}
 	
+	else{
 	$sql = "INSERT INTO termekek (nev, kategoria, kezdo_licit, aktualis_licit, aukcio_vege, kep1, kep2, kep3, leiras, username) VALUES ('$nev', '$kategoria', '$licit', '$licit', '$aukcio_vege', '$file_name1', '$file_name2', '$file_name3', '$leiras', '$uname')";
 	if($mysqli->query($sql) === true){
 		echo "A hirdetése felvételre került. Automatikusan visszairányítjuk a kezdőoldalra.";
@@ -39,10 +45,14 @@
 		echo "HIBA: Could not able to execute $sql. " . $mysqli->error;
 	}
 	
-	 
-	$mysqli->close();
+		$mysqli->close();
 	
 	
 	header( "refresh:5;url=welcome.php" );
+	
+	}
+	
+	 
+
 
 ?>

@@ -44,6 +44,7 @@ if(mysqli_multi_query($mysqli, $sql)){
 					$username = $row["username"];
 					$aukcio_vege = $row["aukcio_vege"];
 					$nyertes = $row["nyertes_user"];
+					$lejart = $row["lejart"];
 					$result->free();
 			}
 			
@@ -137,10 +138,17 @@ echo "</div>";
 	echo "Nyertes user: ".$nyertes."<br>";
 echo "</div>";
 	//licitálás
+	if($lejart == 0)
+	{
 	echo "<form onsubmit='return hibasLicit()' enctype='multipart/form-data' action='bid.php?id=".$id."' method='post'>";
 	echo "Mennyit ér neked? <input type='number' name='uj_licit' id='uj_licit'>";
 	echo "<input type='submit' value='Licitálok'>";
 	echo "</form>";
+	}
+	else{
+		echo "Ez az aukció már véget ért.";
+		echo "<br><br>";
+	}
 	//aukció vége
 	echo "Hátralévő idő: <p id='visszaszamlalo'></p>";
 	//kedvencek
@@ -162,6 +170,7 @@ echo "</div>";
 
 ?>
 </div>
+<br><br>
 <footer>
 	<p>Pannon Egyetem 2020</p>
 </footer>

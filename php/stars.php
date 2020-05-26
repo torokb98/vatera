@@ -26,10 +26,26 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 
-table, th, td {
-  border: 1px solid black;
+body{
+  background-image: url(welcome.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color:#464646;
+
 }
 
+table, th, td {
+  border: 1px solid black;
+  background-color: white;
+}
+
+
+
+
+
+footer {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -52,6 +68,26 @@ table, th, td {
 	<title>Kedvenceim</title>
 </head>
 <body>
+
+
+	<div class="w3-top">
+	  <div class="w3-bar w3-black w3-card w3-center w3-large">
+		
+		
+		<a href="welcome.php" class="w3-bar-item w3-button w3-padding-large w3-white">Kezdőoldal</a>
+		<a href="new-auction.php" class="w3-bar-item w3-button w3-padding-large w3-white">Hirdetesfeladás</a>
+		<a href="my-auctions.php" class="w3-bar-item w3-button w3-padding-large w3-white">Hirdetéseim</a>
+		<a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">Kedvenceim</a>
+		<a href="reset-password.php" class="w3-bar-item w3-button w3-padding-large w3-white">Új jelszó létrehozása</a>
+		<a href="logout.php" class="w3-bar-item w3-button w3-padding-large w3-white">Kijelentkezés</a>
+	  </div>
+
+	</div>
+
+
+<br><br>
+
+
 <div id="page-container">
 <div id="content-wrap">
 	<div class="page-header" align="center">
@@ -61,7 +97,7 @@ table, th, td {
 	
 	<?php
 	require_once "config.php";
-	$sql = "SELECT id, nev, kep1 FROM termekek WHERE id=(SELECT termek_id FROM kedvencek WHERE username = '".$my_username."')";
+	$sql = "SELECT id, nev, kep1 FROM termekek WHERE id IN (SELECT termek_id FROM kedvencek WHERE username = '".$my_username."')";
 	$result = $mysqli->query($sql);
 
 	if ($result->num_rows > 0) {
@@ -71,10 +107,10 @@ table, th, td {
 			$id = $row["id"];
 			echo "<tr>";
 			if($row['kep1'] != null){
-				echo "<td width='300px'><a href='auction.php?id=".$id."'><img src=kepek\\".$row["kep1"]." width='200'></a></td>";
+				echo "<td align='center' width='300px'><a href='auction.php?id=".$id."'><img src=kepek\\".$row["kep1"]." width='200'></a></td>";
 			}
 			else{
-				echo "<td width='300px'><a href='auction.php?id=".$id."'><img src=nincs-kep.jpg width='200'></a></td>";
+				echo "<td align='center' width='300px'><a href='auction.php?id=".$id."'><img src=nincs-kep.jpg width='200'></a></td>";
 			}
 			echo "<td><a href='auction.php?id=".$id."'>".$row["nev"]."</a></td>";
 			echo "<td><a href='remove_star.php?id=".$id."'>Eltávolítás a kedvencek közül</a></td>";
@@ -89,10 +125,6 @@ table, th, td {
 	$mysqli->close();
 	
 	?>
-	
-<form action="welcome.php" method="post" style='position:absolute;bottom:50px;left:10px;'>
-<input type="submit" value="Vissza a főmenübe">
-</form>
 <div>
 <footer>
 	<p>Pannon Egyetem 2020</p>
