@@ -200,12 +200,12 @@ footer {
 	<input type="checkbox" id="leiras" value="igen" name="leiras" <?php echo $check; ?>>
 	<label for="leiras">Keresés a leírásban is</label>
 	<br>
-	<input type="submit" value="Keresés">
+	<input type="submit" style="width:150px" value="Keresés">
 	
 </form>
 
 <form align='center' action="welcome.php">
-	<input type="submit" value="Feltételek törlése">
+	<input type="submit" style="width:150px" value="Feltételek törlése">
 </form><br>
 
 <?php
